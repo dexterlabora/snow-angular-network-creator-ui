@@ -1,0 +1,95 @@
+<div *ngIf="!users">Loading User Data...</div>
+
+<div *ngIf="users">
+
+<h1>Meraki Organizations</h1>
+    <table class='table table-striped'>
+      <tr><th>ID</th><th>Name</th>
+      <tr *ngFor="let org of orgs">
+        <td>{{ org.id }}</td>
+        <td>{{ org.name }}</td>
+      </tr>
+    </table>
+
+<h1>Networks</h1>
+<!--
+<table class='table table-striped'>
+  <tr><th>ID</th><th>Name</th>
+  <tr *ngFor="let net of nets">
+    <td>{{ net.id }}</td>
+    <td>{{ net.name }}</td>
+  </tr>
+</table>
+-->
+<select>
+  <option *ngFor="let net of nets" value="net.id">{{net.name}}</option>
+</select>
+
+<h1>New Meraki Network Set-Up</h1>
+
+
+<form class="form-horizontal" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+    <div class="form-group">
+        <label for="networkName" class="col-sm-2 control-label">Network Name:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" name="name" ngModel/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="networkTag" class="col-sm-2 control-label">Network Tag:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" name="tags" ngModel/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="siteAddress" class="col-sm-2 control-label">Site Address:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" name="address" ngModel/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="orderNumber" class="col-sm-2 control-label">Order Number:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" name="orderNumber" ngModel/>
+        </div>
+      </div>
+    
+      <select name="template" ngModel>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+    
+      
+      <select name="timeZone" ngModel>
+        <option value="America/Chicago">America/Chicago</option>
+        <option value="America/Los Angeles">America/Los Angeles</option>
+        <option value="America/New York">America/New York</option>
+        <option value="Europe/Amsterdam">Europe/Amsterdam</option>
+      </select>
+
+    <button>Submit</button>
+</form>
+
+
+
+<div>
+  <h3>Post Results</h3>
+  <p *ngIf="newNet">Network Created!</p>
+  {{newNet| json}}
+</div>    
+  
+<!--
+<h1>System Users</h1>
+  <table class='table table-striped'>
+    <tr><th>Name</th><th>Email</th><th>Created</th></tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.first_name }} {{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.sys_created_on | date: 'mediumDate'}}</td>
+    </tr>
+  </table>
+-->
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessagesComponent } from './messages/messages.component'
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  branding = 'ng-snow';
+  branding = 'Cisco Meraki';
 
   constructor(
   ) { }

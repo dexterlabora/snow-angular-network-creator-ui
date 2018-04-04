@@ -1,0 +1,91 @@
+
+<div class="col-md-8"> 
+    <h2>Add Devices to Inventory</h2>
+    <div class="input-group">
+        <input type="text" #orderNum class="form-control" placeholder="Order Number, License Key or Serial Number"/>
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" (click)='onClaimOrder(orderNum.value)'>Claim Order</button>
+            <button class="btn btn-primary" type="button" (click)='onClaimLicense(orderNum.value)'>Claim License</button>
+            <button class="btn btn-primary" type="button" (click)='onClaimSerial(orderNum.value)'>Claim Serial</button>
+        </span>
+    </div>
+   </div>
+
+<div class="col-md-12"> 
+  <h2>Attach Devices to Network</h2>
+  <p>Network: <b>{{network.name}}</b></p>
+  <h3>Inventory</h3>
+  <div *ngIf="loading">Loading Meraki Data...</div>
+  <!--app-table [rows]="rows" [columns]="columns" padding-bottom (change)="devicesSelected($event)"></app-table -->
+  
+  <div style='width:90%'>
+    <!--
+    <div class="btn-group" role="group" aria-label="Filter" (click)="onButtonGroupClick($event)">
+      <button type="button" class="btn btn-default active" (click)="onFilterUnclaimed()">Unclaimed</button> 
+      <button type="button" class="btn btn-default" (click)="onFilterThisNet()">This Network</button>       
+      <button type="button" class="btn btn-default" (click)="onFilterAll()">All Devices</button>
+    </div>
+  -->
+  
+    <ngx-datatable
+      style="padding:20px; width: 100%"
+      class="material"
+      [rows]="rows"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="5"
+      [selected]="devicesToAdd"
+      [selectionType]="'checkbox'"
+      [selectAllRowsOnPage]="false"      
+      (select)='onSelect($event)'>
+      <ngx-datatable-column
+        [width]="30"
+        [sortable]="true"
+        [canAutoResize]="true"
+        [draggable]="false"
+        [resizeable]="true"
+        [headerCheckboxable]="true"
+        [checkboxable]="true">
+        </ngx-datatable-column>
+        <ngx-datatable-column 
+          *ngFor="let c of columns"
+          [name]="c.name"
+        >
+        </ngx-datatable-column>          
+    </ngx-datatable>
+  </div>
+
+
+  <br/>
+  <button class="btn btn-primary" (click)="onAddDevices()" [disabled]="!isDevicesSelected()" >Add Selected Devices</button>
+</div>
+<div class="row">
+<div class="col-md-4 col-md-offset-8">
+    <button class="btn btn-warning" type="button" (click)='onCreateNetwork()'>Create Another Network</button>
+</div>
+</div>
+
+
+
+
+<!--
+<div class="col-md-8">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Event Log</h5>
+
+        <ul>
+          <li *ngFor="let e of eventLog">
+            {{ e }}
+          </li>
+        </ul>
+
+    </div>
+  </div>
+</div>
+-->
+
+
+

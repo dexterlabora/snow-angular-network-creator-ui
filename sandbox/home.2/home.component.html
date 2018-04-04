@@ -1,0 +1,81 @@
+<div *ngIf="!orgs">Loading Meraki Data...</div>
+
+
+<h2>New Network Set-Up</h2>
+<div class="col-sm-8">
+  <form class="form-horizontal" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="form-group">
+      <label for="org" class="col-sm-4 control-label">Organization</label>
+      <div class="col-sm-6">
+        <select name="org" ngModel>
+          <option *ngFor="let org of orgs" value="org.id">{{org.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="template" class="col-sm-4 control-label">Template</label>
+        <div class="col-sm-6">
+          <select name="template" ngModel>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+      </div> 
+
+    <div class="form-group">
+      <label for="networkName" class="col-sm-4 control-label">Network Name:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="name" ngModel/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="networkTag" class="col-sm-4 control-label">Network Tag:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="tags" ngModel/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="siteAddress" class="col-sm-4 control-label">Site Address:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="address" ngModel/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="orderNumber" class="col-sm-4 control-label">Order Number:</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="orderNumber" ngModel/>
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <label for="timeZone" class="col-sm-4 control-label">Time Zone</label>
+      <div class="col-sm-4">
+        <select name="timeZone" ngModel>
+          <option value="America/Chicago">America/Chicago</option>
+          <option value="America/Los Angeles">America/Los Angeles</option>
+          <option value="America/New York">America/New York</option>
+          <option value="Europe/Amsterdam">Europe/Amsterdam</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+<div class="col-sm-4">
+    <h4><i>Log</i></h4>
+    <div *ngIf="newNet">
+      <div *ngIf="newNet.id;else fail">
+        <p class="alert-success">Network created!</p>
+        {{newNet| json}}
+      </div>
+      <ng-template #fail>
+        <p class="alert-danger">We have a problem..</p>
+        {{newNet.errors}}
+      </ng-template>
+    </div>
+</div>
