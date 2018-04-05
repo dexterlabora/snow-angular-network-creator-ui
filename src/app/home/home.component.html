@@ -1,4 +1,3 @@
-{{tz}}
 <div *ngIf="loading">Loading Meraki Data...</div>
 
 
@@ -17,11 +16,6 @@
     <div class="form-group">
         <label for="template" class="col-sm-4 control-label">Template</label>
         <div class="col-sm-6">
-          <!--select formControlName="template">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-          </select-->
           <select formControlName="templateId">
               <option *ngFor="let template of templates" [value]="template.id" >{{template.name}}</option>
             </select>
