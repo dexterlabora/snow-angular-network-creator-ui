@@ -14,6 +14,17 @@ This project is an Angular application to interact with the Meraki API.
 
 This app is built for ServiceNow, but could easily be ported to a customm Meraki API proxy.
 
+# Design Concept and Prototype
+
+![](screenshots/claim-concept.png =250x)
+
+![](snow-demo/screenshots/create-mvp.png =250x)
+
+![](screenshots/claim-mvp.png =250x)
+
+![](screenshots/create-concept.png =250x)
+
+
 
 ToDo
 Instructions for creating ServiceNow REST interfaces using the provided snow-scripts
