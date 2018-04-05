@@ -1,3 +1,40 @@
+# Network Creation UI Tool
+## Meraki and ServiceNow
+
+# Overview
+This project is an Angular application to interact with the Meraki API. 
+
+# Features
+* Create a Meraki network with web form
+* Bind network to a list of config templates
+* Claim order,serial and license numbers
+* Add devices to the newly created network
+* Log messages to a central component
+* Send new network and device adjusments to backend service
+
+This app is built for ServiceNow, but could easily be ported to a customm Meraki API proxy.
+
+
+ToDo
+Instructions for creating ServiceNow REST interfaces using the provided snow-scripts
+include NodeJS express proxy
+
+## Disclaimer
+This is a proof of concept and has not been thoroughly tested. Use as an educational tool or as a starting point for your next project.
+
+## Written by Cory Guynn @eedionysus
+http://meraki.io
+
+
+
+
+
+# Development
+This project was based off of the amazing work
+https://github.com/nathangrove/ng-snow
+
+The instructions from the original project are copied below to get the project configured and running.
+
 # NG-SNow Starter Project
 This starter project is intended to help you build and deploy angular2 applications on the ServiceNow platform. Before you ask me "Why angular2?" I will go ahead and answer that question, because its awesome. Thats why. Here are a few reasons why I like it:
 

@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { ClaimComponent } from './claim/claim.component';
-
+//import { TzList } from '../assets/tzlist.js';
 
 // Table components
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';

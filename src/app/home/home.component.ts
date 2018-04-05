@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -5,6 +7,10 @@ import { Router } from '@angular/router';
 import { MerakiService } from '.././services/meraki.service'
 import { MessageService } from '.././services/message.service';
 import { GlideService } from '.././services/glide.service';
+
+//import { TzList } from '../../assets/tzlist';
+//import * as variable from 'tzList';
+
 
 @Component({
   selector: 'app-home',
@@ -29,7 +35,9 @@ export class HomeComponent implements OnInit {
     private router: Router, 
     private messageService: MessageService,
     private glideService: GlideService,
+    //private tzlist: TzList,
     private meraki: MerakiService) { }
+    
 
   ngOnInit() {
     // The base API route to Meraki services. This must go through a backend server or proxy because of CORS 
@@ -38,6 +46,7 @@ export class HomeComponent implements OnInit {
 
     // Event Log for debugging/status
     //this.eventLog = [];
+    //this.tz = this.tzlist;
 
     // setup form
     this.form = this.fb.group({
