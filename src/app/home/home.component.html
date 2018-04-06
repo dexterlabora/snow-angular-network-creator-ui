@@ -1,5 +1,11 @@
-<div *ngIf="loading">Loading Meraki Data...</div>
-
+<div *ngIf="loading">
+  <div class="psoload">
+    <div class="straight"></div>
+    <div class="curve"></div>
+    <div class="center"></div>
+    <div class="inner"></div>
+  </div>
+</div>
 
 <h2>New Network Set-Up</h2>
 <div class="col-sm-6">
@@ -14,30 +20,30 @@
     </div>
 
     <div class="form-group">
-        <label for="template" class="col-sm-4 control-label">Template</label>
-        <div class="col-sm-6">
-          <select formControlName="templateId">
-              <option *ngFor="let template of templates" [value]="template.id" >{{template.name}}</option>
-            </select>
-        </div>
-      </div> 
+      <label for="template" class="col-sm-4 control-label">Template</label>
+      <div class="col-sm-6">
+        <select formControlName="templateId">
+          <option *ngFor="let template of templates" [value]="template.id">{{template.name}}</option>
+        </select>
+      </div>
+    </div>
 
     <div class="form-group">
       <label for="networkName" class="col-sm-4 control-label">Network Name:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="name"/>
+        <input type="text" class="form-control" formControlName="name" />
       </div>
     </div>
     <div class="form-group">
       <label for="networkTag" class="col-sm-4 control-label">Network Tag:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="tags"/>
+        <input type="text" class="form-control" formControlName="tags" />
       </div>
     </div>
     <div class="form-group">
       <label for="siteAddress" class="col-sm-4 control-label">Site Address:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="address"/>
+        <input type="text" class="form-control" formControlName="address" />
       </div>
     </div>
     <!--div class="form-group">
@@ -45,12 +51,12 @@
       <div class="col-sm-6">
         <input type="text" class="form-control" formControlName="orderNumber"/>
       </div>
-    </div--> 
+    </div-->
 
     <div class="form-group">
       <label for="timeZone" class="col-sm-4 control-label">Time Zone</label>
       <div class="col-sm-4">
-        <select formControlName="timeZone" >
+        <select formControlName="timeZone">
           <option value="America/Chicago">America/Chicago</option>
           <option value="America/Los_Angeles">America/Los Angeles</option>
           <option value="America/New_York">America/New York</option>
@@ -65,48 +71,47 @@
 
 
 <div class="col-sm-6">
-    <div *ngIf="newNet">
-      <div *ngIf="newNet.id;else fail">
-        <p class="alert-success">Network created</p>  
-        <p *ngIf="newNet.configTemplateId" class="alert-success">Template bound</p>
 
-        <table class="table-sm">
-            <caption>Network Summary</caption>
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td>{{newNet.name}}</td>
-              </tr>
-              <tr>
-                <td>ID</td>
-                <td>{{newNet.id}}</td>
-              </tr>
-              <tr>
-                <td>Type</td>
-                <td>{{newNet.type}}</td>
-              </tr>
-              <tr>
-                <td>Time Zone</td>
-                <td>{{newNet.timeZone}}</td>
-              </tr>
-              <tr>
-                <td>Tags</td>
-                <td>{{newNet.tags}}</td>
-              </tr>
-              <tr>
-                <td>Template ID</td>
-                <td>{{newNet.configTemplateId}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <button [disabled]="loading" class="btn btn-success pull-right" (click)="onAddDevices()" >Add Devices to Network</button>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Network Summary</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <b>{{newNet.name}}</b>
+      </h6>
+
+      <div *ngIf="newNet">
+        <div *ngIf="newNet.id">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">ID</div>
+              <div class="col-md-6">{{newNet.id}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Type</div>
+              <div class="col-md-6">{{newNet.type}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Address</div>
+              <div class="col-md-6">{{newNet.address}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Time Zone</div>
+              <div class="col-md-6">{{newNet.timeZone}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Tags</div>
+              <div class="col-md-6">{{newNet.tags}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Template ID</div>
+              <div class="col-md-6">{{newNet.configTemplateId}}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <ng-template #fail>
-        <p class="alert-danger">We have a problem..</p>
-        {{newNet.errors}}
-      </ng-template>
+
+      <button [disabled]="!newNet.configTemplateId" class="btn btn-success pull-right card-link" (click)="onAddDevices()">Add Devices to Network</button>
+
     </div>
+  </div>
 </div>
-
-
-

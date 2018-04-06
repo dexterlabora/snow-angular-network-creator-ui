@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   inventory: any;
   templates: any;
   form: FormGroup;
-  newNet: any;
+  newNet: any = {};
   loading: Boolean;
   eventLog: any;
 
@@ -56,8 +56,7 @@ export class HomeComponent implements OnInit {
       address: "",
       timeZone: "",
       tags: "",
-      type: "wireless", // hard coded for now. Will figure out templates later.
-      orderNumber: ""
+      type: "wireless" // hard coded for now. Will figure out templates later.
     });
 
     // watch for state changes
@@ -110,6 +109,7 @@ export class HomeComponent implements OnInit {
       this.loading = false;
       this.newNet = res;
       //this.eventLog.push(res);
+      this.newNet.address = f.value.address;
       console.log('this.newNet', this.newNet);
       this.messageService.add("Network Created: "+ this.newNet.id);
     }).then(() => {

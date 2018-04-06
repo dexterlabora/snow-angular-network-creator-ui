@@ -112,14 +112,13 @@ export class ClaimComponent implements OnInit {
         // skip loop if the property is from prototype
         if(!this.inventory[0].hasOwnProperty(prop)) continue;
         this.columns.push({
-          name: prop
+          // insert a space before all caps, then capatilize everything
+          name: prop.replace(/([A-Z])/g, ' $1').toUpperCase()      
         })
       }
       console.log('columns ', this.columns);
       this.rows = this.inventory;
    
-      
-
       // format time
       for (var r in this.rows){
         this.rows[r].claimedAt = this.epochUTC(this.rows[r].claimedAt);
@@ -150,7 +149,7 @@ export class ClaimComponent implements OnInit {
     console.log('Claim onSelect this.devicesToAdd', this.devicesToAdd);  
   }
 
-  /* Old Filters for full inventory. Removed because there is no use case.
+  /* Old Filters for full inventory. Removed because there is no use case. Performing filtering on initialization now.
   onFilterUnclaimed() {
     this.rows = this.inventory.filter(i => !i.networkId);
     console.log("filterUnclaimed rows: ", this.rows);

@@ -1,3 +1,11 @@
+<div *ngIf="loading">
+    <div class="psoload">
+      <div class="straight"></div>
+      <div class="curve"></div>
+      <div class="center"></div>
+      <div class="inner"></div>
+      </div>
+  </div>
 <div class="col-md-4">
   <h2>Add Devices to Inventory</h2>
   <form>
@@ -24,7 +32,7 @@
     <b>{{network.name}}</b>
   </p>
   <h3>Inventory</h3>
-  <div *ngIf="loading">Loading Meraki Data...</div>
+
   <!--app-table [rows]="rows" [columns]="columns" padding-bottom (change)="devicesSelected($event)"></app-table -->
 
   <!--
