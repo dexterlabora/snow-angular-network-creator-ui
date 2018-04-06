@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
     this.meraki.newNetwork(f.value.orgId, merakiData).then(res => {
       this.loading = false;
       this.newNet = res;
-      this.eventLog.push(res);
+      //this.eventLog.push(res);
       console.log('this.newNet', this.newNet);
       this.messageService.add("Network Created: "+ this.newNet.id);
     }).then(() => {
