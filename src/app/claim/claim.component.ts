@@ -108,6 +108,8 @@ export class ClaimComponent implements OnInit {
       console.log('onInit lisInventory Filtered: res => ', this.inventory);
 
       //map data to rows and columns
+      this.columns = [];
+      this.rows = [];
       for (var prop in this.inventory[0]) {
         // skip loop if the property is from prototype
         if(!this.inventory[0].hasOwnProperty(prop)) continue;
@@ -196,8 +198,10 @@ export class ClaimComponent implements OnInit {
 
   onAddDevices(){
     this.meraki.addDevices(this.netId, this.devicesToAdd).then( res => {
-      this.messageService.add("Devices Added");
+      this.messageService.add("Device Add Complete");
       this.glideService.addDevices(this.netId, this.devicesToAdd);
+      // refresh inventory list
+      this.getInventory();
       }).catch(error => {
         this.messageService.add("Device Add Error: "+ error)
       });

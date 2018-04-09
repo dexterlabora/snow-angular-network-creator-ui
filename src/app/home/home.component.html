@@ -6,9 +6,9 @@
     <div class="inner"></div>
   </div>
 </div>
+<div class="col-md-6">
+  <h2>New Network Set-Up</h2>
 
-<h2>New Network Set-Up</h2>
-<div class="col-sm-6">
   <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit(form)">
     <div class="form-group">
       <label for="orgId" class="col-sm-4 control-label">Organization</label>
@@ -31,19 +31,19 @@
     <div class="form-group">
       <label for="networkName" class="col-sm-4 control-label">Network Name:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="name" />
+        <input type="text" class="form-control" formControlName="name" placeholder="Store-001" />
       </div>
     </div>
     <div class="form-group">
-      <label for="networkTag" class="col-sm-4 control-label">Network Tag:</label>
+      <label for="networkTag" class="col-sm-4 control-label">Network Tags:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="tags" />
+        <input type="text" class="form-control" formControlName="tags" placeholder="flagship south" />
       </div>
     </div>
     <div class="form-group">
       <label for="siteAddress" class="col-sm-4 control-label">Site Address:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="address" />
+        <input type="text" class="form-control" formControlName="address" placeholder="1 Main St" />
       </div>
     </div>
     <!--div class="form-group">
@@ -53,6 +53,7 @@
       </div>
     </div-->
 
+    <!-- using template to assign timeZone>
     <div class="form-group">
       <label for="timeZone" class="col-sm-4 control-label">Time Zone</label>
       <div class="col-sm-4">
@@ -64,54 +65,59 @@
         </select>
       </div>
     </div>
+  -->
+    <div class="row">
+      <button class="btn btn-primary" type="submit">Create Network</button>
+    </div>
 
-    <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 </div>
 
 
-<div class="col-sm-6">
+<div class="col-md-6">
+  <div *ngIf="newNet.id">
 
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Network Summary</h5>
-      <h6 class="card-subtitle mb-2 text-muted">
-        <b>{{newNet.name}}</b>
-      </h6>
+    <h2 class="card-title">Summary</h2>
+    <h4 class="card-subtitle mb-2 text-muted">
+      <b>{{newNet.name}}</b>
+    </h4>
 
-      <div *ngIf="newNet">
-        <div *ngIf="newNet.id">
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-6">ID</div>
-              <div class="col-md-6">{{newNet.id}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">Type</div>
-              <div class="col-md-6">{{newNet.type}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">Address</div>
-              <div class="col-md-6">{{newNet.address}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">Time Zone</div>
-              <div class="col-md-6">{{newNet.timeZone}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">Tags</div>
-              <div class="col-md-6">{{newNet.tags}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">Template ID</div>
-              <div class="col-md-6">{{newNet.configTemplateId}}</div>
-            </div>
-          </div>
-        </div>
+
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-6">Network ID</div>
+        <div class="col-md-6">{{newNet.id}}</div>
       </div>
-
-      <button [disabled]="!newNet.configTemplateId" class="btn btn-success pull-right card-link" (click)="onAddDevices()">Add Devices to Network</button>
-
+      <div class="row">
+        <div class="col-md-6">Type</div>
+        <div class="col-md-6">{{newNet.type}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Address</div>
+        <div class="col-md-6">{{newNet.address}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Time Zone</div>
+        <div class="col-md-6">{{newNet.timeZone}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Tags</div>
+        <div class="col-md-6">{{newNet.tags}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Template ID</div>
+        <div class="col-md-6">{{newNet.configTemplateId}}</div>
+      </div>
     </div>
+
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <button class="btn btn-success pull-right" [disabled]="!newNet.configTemplateId" (click)="onAddDevices()">
+      <i class="fa fa-plus"></i> Add Devices
+    </button>
   </div>
 </div>
