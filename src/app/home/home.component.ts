@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MerakiService } from '.././services/meraki.service'
 import { MessageService } from '.././services/message.service';
 import { GlideService } from '.././services/glide.service';
+import { TableService } from '.././services/table.service';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,9 @@ export class HomeComponent implements OnInit {
   loading: Boolean;
   eventLog: any;
   modal: Boolean = true;
+  
+  // testing table API
+  table: any;
 
   constructor(
     private fb: FormBuilder, 
@@ -31,11 +35,12 @@ export class HomeComponent implements OnInit {
     private router: Router, 
     private messageService: MessageService,
     private glideService: GlideService,
-    //private tzlist: TzList,
+    private tableService: TableService,
     private meraki: MerakiService) { }
     
 
   ngOnInit() {
+    this.tableService.listInventory().then(res => this.table);
 
     // setup form
     this.form = this.fb.group({
@@ -119,7 +124,7 @@ export class HomeComponent implements OnInit {
           console.log('final this.newNet', this.newNet);
           this.messageService.add("Template Attached: "+ this.newNet.configTemplateId);
           // save to Glide Table
-          this.glideService.newNetwork(this.newNet);
+          //this.glideService.newNetwork(this.newNet);
         });
       }).catch(error => {
         this.loading = false;

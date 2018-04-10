@@ -11,6 +11,7 @@ import { SnowInterceptor } from './services/snow.interceptor';
 import { MerakiService } from './services/meraki.service';
 import { MessageService } from './services/message.service';
 import { GlideService } from './services/glide.service';
+import { TableService } from './services/table.service';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
     { provide: APP_BASE_HREF, useValue: '/' },
     MerakiService,
     MessageService,
-    GlideService
+    GlideService,
+    TableService
   ],
   bootstrap: [AppComponent]
 })

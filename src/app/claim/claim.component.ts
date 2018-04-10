@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MerakiService } from '.././services/meraki.service'
 import { MessageService } from '.././services/message.service';
 import { GlideService } from '.././services/glide.service';
+import { TableService } from '.././services/table.service';
 
 @Component({
   selector: 'app-claim',
@@ -60,10 +61,14 @@ export class ClaimComponent implements OnInit {
     private router: Router, 
     private messageService: MessageService,
     private glideService: GlideService,
+    private tableService: TableService,
     private meraki: MerakiService) { }
 
 
   ngOnInit() {
+    // Table API test
+    //this.tableService.listInventory().then(res => this.table);
+
     // Listen for URL netId parameter change and update state
     this.sub = this.route.params.subscribe(params => {
       this.netId = params['netId'];
@@ -199,12 +204,21 @@ export class ClaimComponent implements OnInit {
   onAddDevices(){
     this.meraki.addDevices(this.netId, this.devicesToAdd).then( res => {
       this.messageService.add("Device Add Complete");
-      this.glideService.addDevices(this.netId, this.devicesToAdd);
+      //this.glideService.addDevices(this.netId, this.devicesToAdd);
+      this.updateDB();
       // refresh inventory list
       this.getInventory();
       }).catch(error => {
         this.messageService.add("Device Add Error: "+ error)
       });
+  }
+
+  updateDB(){
+    // filter inventory for list of devices for this network
+    let tableData = this.inventory.filter(i => i.networkId != this.netId);
+    //this.tableService.newInventory(tableData).then(res => console.log("table DB updated"));
+    console.log('updateDB netId, tableData', this.netId, tableData)
+    this.glideService.addDevices(this.netId, tableData).then(res => console.log("updateDB glide table updated res", res));;
   }
 
   onCreateNetwork(){

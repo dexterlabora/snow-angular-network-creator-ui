@@ -8,7 +8,7 @@ import { MessagesComponent } from './messages/messages.component'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  branding = 'Meraki Network Builder';
+  branding = 'Meraki Network Creator';
 
   constructor(
   ) { }

@@ -1,11 +1,15 @@
 import {Injectable, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../services/message.service';
+import { TableService } from '../services/table.service';
 
 @Injectable()
 export class MerakiService implements OnInit {
 
-constructor(private http: HttpClient, private messageService: MessageService) { 
+constructor(
+  private http: HttpClient, 
+  private tableService: TableService,
+  private messageService: MessageService) { 
     this.baseUrl = '/api/x_170302_global/meraki_proxy';
 }
 
@@ -121,15 +125,17 @@ claimOrder = (orgId: String, data: any) => new Promise((resolve, reject) => {
   });
 
   
-// wrapper to handle multiple devices
-async addDevices(netId: String, devices: any) {
+// wrapper to handle multiple devices, prints messages and commits to ServiceNow table
+async addDevices(networkId: String, devices: any) {
   for (let d in devices){
     let serial = devices[d]['serial'];
     console.log("Adding serial: ", serial);
     // call API and await for response before next call. This helps avoid rate limit issues... although a bit slow.
-    await this.claimDevice(netId, {serial}).then( res => {
+    await this.claimDevice(networkId, {serial}).then( res => {
       console.log("addDevices device claimed");
       this.messageService.add('Device Added: '+serial);
+      // log device entry to table DB
+      //this.tableService.newInventory({networkId, serial});
     }).catch(error => {
       this.messageService.add('Device Add Error: '+error);
     })

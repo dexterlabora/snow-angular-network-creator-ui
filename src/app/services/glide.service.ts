@@ -6,7 +6,7 @@ import { MessageService } from '../services/message.service';
 export class GlideService {
  
   constructor(private http: HttpClient, private messageService: MessageService) { 
-      this.baseUrl = '/api/x_170302_global/glide';
+      this.baseUrl = '/api/x_170302_global/glide_table';
   }
 
   baseUrl: String;
