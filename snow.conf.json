@@ -5,22 +5,22 @@
     "endpoint": "x_170302_global_index.do"
   },
   "application": {
-    "name": "ngSnow-demo",
+    "name": "Meraki Network Provision - Angular",
     "scope": "x_170302_global",
     "sys_id": "b0f6630d4fc1530077af1b818110c7dd"
   },
   "files": {
     "html": {
-      "index": "8df6a3cd4fc1530077af1b818110c7ec"
+      "index": "9aadb91f4fdd130077af1b818110c7e9"
     },
     "js": {
-      "inline": "c9f6a3cd4fc1530077af1b818110c7f0",
-      "polyfills": "c9f6630d4fc1530077af1b818110c7e1",
-      "vendor": "99f623854f05530077af1b818110c7aa",
-      "main": "85f6630d4fc1530077af1b818110c7d1"
+      "inline": "1aadf11f4fdd130077af1b818110c748",
+      "polyfills": "16adfddb4fdd130077af1b818110c7fb",
+      "main": "52adb91f4fdd130077af1b818110c7c7",
+      "vendor": "5aad751f4fdd130077af1b818110c70f"
     },
     "css": {
-      "styles": "c1f6630d4fc1530077af1b818110c7aa"
+      "styles": "9eadb91f4fdd130077af1b818110c7ec"
     }
   }
 }

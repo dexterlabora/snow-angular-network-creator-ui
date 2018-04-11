@@ -85,8 +85,9 @@ function upload_file(file,table,sys_id){
 
   var req = http.request(options, function(res) {
     const statusCode = res.statusCode; 
+    console.log("request options: ", options);
     if (statusCode !== 200) {
-      console.log("Upload failed with status code " + statusCode + " for file:",file);
+      console.log("Upload failed with status code " + statusCode + " for file:",file);    
       return;
     }
 

@@ -8,13 +8,15 @@
 
 /* Styles go here */
 
-/* Loading Spinner */
+
 
 body {
     margin: 0;
-    background: #333;
+    background: rgb(232, 232, 232);
   }
   
+/* Loading Spinner */
+
   @keyframes arrow-spin {
     100% {
       transform: rotate(179deg);
