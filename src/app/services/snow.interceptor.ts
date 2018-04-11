@@ -9,7 +9,7 @@
 */
 
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -26,4 +26,5 @@ export class SnowInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
   }
+
 }

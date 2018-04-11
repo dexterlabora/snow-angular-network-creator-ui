@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@swimlane/ngx-datatable": "^11.2.0",
+    "angular2-toaster": "^5.0.1",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "ng2-smart-table": "^1.2.2",

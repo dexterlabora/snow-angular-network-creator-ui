@@ -7,6 +7,7 @@ import { MerakiService } from '.././services/meraki.service'
 import { MessageService } from '.././services/message.service';
 import { GlideService } from '.././services/glide.service';
 import { TableService } from '.././services/table.service';
+import { ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'app-claim',
@@ -41,7 +42,7 @@ export class ClaimComponent implements OnInit {
   columns: any = [];
   //devicesAvailable: Boolean = false;
 
-  /*
+  /* Table Data Format (for reference)
   rows = [
     { serial: '1111-1234-1234', model: 'MR33', claimedAt: '12-12-15 4:15pm' },
     { serial: '2222-1234-1234', model: 'MR33', claimedAt: '12-12-15 4:15pm' },
@@ -62,7 +63,10 @@ export class ClaimComponent implements OnInit {
     private messageService: MessageService,
     private glideService: GlideService,
     private tableService: TableService,
-    private meraki: MerakiService) { }
+    private toasterService: ToasterService, 
+    private meraki: MerakiService) { 
+      this.toasterService = toasterService;
+    }
 
 
   ngOnInit() {
@@ -94,8 +98,10 @@ export class ClaimComponent implements OnInit {
       this.network = res;
     });
   }
+
   getInventory (){
     // get Inventory
+    this.devicesToAdd = [];
     this.loading = true;
     this.meraki.listInventory(this.orgId).then(res => {
       console.log('onInit lisInventory: res => ', res)
@@ -202,23 +208,37 @@ export class ClaimComponent implements OnInit {
   */
 
   onAddDevices(){
+    this.loading = true;
     this.meraki.addDevices(this.netId, this.devicesToAdd).then( res => {
       this.messageService.add("Device Add Complete");
+      this.loading = false;
       //this.glideService.addDevices(this.netId, this.devicesToAdd);
-      this.updateDB();
+      this.updateServiceNow();
+      this.toasterService.pop('success', 'Devices Added');
       // refresh inventory list
       this.getInventory();
       }).catch(error => {
+        this.loading = false;
         this.messageService.add("Device Add Error: "+ error)
+        this.toasterService.pop('error', 'Devices Add Error', error);
       });
   }
 
-  updateDB(){
+  updateServiceNow(){
     // filter inventory for list of devices for this network
     let tableData = this.inventory.filter(i => i.networkId != this.netId);
-    //this.tableService.newInventory(tableData).then(res => console.log("table DB updated"));
-    console.log('updateDB netId, tableData', this.netId, tableData)
-    this.glideService.addDevices(this.netId, tableData).then(res => console.log("updateDB glide table updated res", res));;
+    //this.tableService.newInventory(tableData).then(res => console.log("table DB updated")); // native table API
+    console.log('updateServiceNow netId, tableData', this.netId, tableData)
+    this.messageService.add("updateServiceNow...")
+    this.loading = true;
+    this.glideService.addDevices(this.netId, tableData).then(res => {
+      this.loading = false;
+      console.log("updateServiceNow glide table res", res)
+      this.messageService.add("ok");
+    }).catch(error => {
+      this.loading = false;  
+      this.messageService.add("updateServiceNow error: "+ error)
+    });
   }
 
   onCreateNetwork(){

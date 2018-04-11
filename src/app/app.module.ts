@@ -18,6 +18,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { ClaimComponent } from './claim/claim.component';
 //import { TzList } from '../assets/tzlist.js';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToasterModule, ToasterService} from 'angular2-toaster';
 
 // Table components
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -47,7 +49,9 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    BrowserAnimationsModule,
+    ToasterModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SnowInterceptor, multi: true },
