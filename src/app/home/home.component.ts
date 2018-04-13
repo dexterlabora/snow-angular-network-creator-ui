@@ -79,7 +79,6 @@ export class HomeComponent implements OnInit {
       "tags": f.value.tags,
       "type": "wireless switch appliance" // hard coded for now. 
     }
-    console.log('merakiData ', merakiData);
     this.loading = true;
     this.messageService.add("Creating Network...");
     this.meraki.newNetwork(f.value.orgId, merakiData).then(res => {
@@ -95,7 +94,7 @@ export class HomeComponent implements OnInit {
       };
       this.loading = true;
       console.log('newNetwork attaching Template merakiData', merakiData);
-      this.messageService.add("Attaching Template...(this could take a while).."+ f.value.templateId);
+      this.messageService.add("Attaching Template: "+f.value.templateId+" ...(this could take a while)..");
       this.meraki.attachTemplate(this.newNet.id, merakiData).then(res => {
         // update final results with template info and address
         this.meraki.returnNetwork(this.newNet.id).then(res => {
@@ -133,17 +132,21 @@ export class HomeComponent implements OnInit {
       this.orgs = res;
       // set default form org
       this.form.get('orgId').setValue(this.orgs[0].id);
+    }).catch(err => {
+      this.messageService.add(err);
     });
   }
 
   getTemplates(){
     this.loading = true;
     this.messageService.add("Loading Templates...");
-    this.meraki.listTemplates(this.orgs[0].id).then(res => {
+    this.meraki.listTemplates(this.orgId).then(res => {
       console.log('home: listTemplates: res => ', res)
       this.messageService.add("ok");
       this.loading = false;   
       this.templates = res;
+    }).catch(err => {
+      this.messageService.add(err);
     });
   }
 

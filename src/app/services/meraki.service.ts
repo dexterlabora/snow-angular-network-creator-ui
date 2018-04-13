@@ -23,6 +23,11 @@ listOrganizations = () => new Promise((resolve, reject) => {
     console.log('meraki service: listOrganizations');
       this.http.get<any>(this.baseUrl+'/organizations').subscribe( res => {
         console.log('listOrganizations res.result: ', res.result)
+        if(res.result.errors){
+          let error = res.result.errors[0];
+          console.log('listOrganizations error: ', error);
+          reject(error);
+        }
         resolve(res.result);
       });
   });
@@ -31,7 +36,12 @@ listNetworks = (orgId:String) => new Promise((resolve, reject) => {
     console.log('listNetworks orgId ',orgId)
     if(orgId){
       this.http.get<any>(this.baseUrl+'/organizations/'+orgId+'/networks').subscribe( res => {
-        console.log('listNetworks res.result: ', res.result)
+        console.log('listNetworks res.result: ', res.result);
+        if(res.result.errors){
+          let error = res.result.errors[0];
+          console.log('listNetworks error: ', error);
+          reject(error);
+        }
         resolve(res.result);
       });
     }else{
@@ -60,6 +70,11 @@ listTemplates = (orgId: String) => new Promise((resolve, reject) => {
     console.log('listTemplates');
       this.http.get<any>(this.baseUrl+'/organizations/'+orgId+'/configTemplates').subscribe( res => {
         console.log('listTemplates res.result: ', res.result)
+        if(res.result.errors){
+          let error = res.result.errors[0];
+          console.log('listTemplates error: ', error);
+          reject(error);
+        }
         resolve(res.result);
       });
   });
@@ -86,7 +101,12 @@ listInventory = (orgId: String) => new Promise((resolve, reject) => {
     console.log('listInventory');
     if(orgId){
       this.http.get<any>(this.baseUrl+'/organizations/'+orgId+'/inventory').subscribe( res => {
-        console.log('listInventory res.result: ', res.result)
+        console.log('listInventory res.result: ', res.result);
+        if(res.result.errors){
+          let error = res.result.errors[0];
+          console.log('listInventory error: ', error);
+          reject(error);
+        }
         resolve(res.result);
       });
     }else{
@@ -99,7 +119,12 @@ returnNetwork = (netId: String) => new Promise((resolve, reject) => {
     console.log('returnNetwork');
     if(netId){
       this.http.get<any>(this.baseUrl+'/networks/'+netId).subscribe( res => {
-        console.log('returnNetwork res.result: ', res.result)
+        console.log('returnNetwork res.result: ', res.result);
+        if(res.result.errors){
+          let error = res.result.errors[0];
+          console.log('returnNetwork error: ', error);
+          reject(error);
+        }
         resolve(res.result);
       });
     }else{

@@ -256,17 +256,21 @@ export class ClaimComponent implements OnInit {
   onClaimOrder(event){
     this.meraki.claimOrder(this.orgId, {order: event}).then( res => {
       this.messageService.add("Order Claimed");
+      this.toasterService.pop('success', 'Order Claimed');
       this.getInventory ();
       }).catch(error => {
         this.messageService.add("Order Error: "+ error)
+        this.toasterService.pop('error', 'Claim Error: '+ error);
       });
   }
   onClaimSerial(event){
     this.meraki.claimOrder(this.orgId, {serial: event}).then( res => {
       this.messageService.add("Serial Claimed");
+      this.toasterService.pop('success', 'Serial Claimed');
       this.getInventory ();
       }).catch(error => {
         this.messageService.add("Serial Error: "+ error)
+        this.toasterService.pop('error', 'Serial Error: '+ error);
       });
   }
   onClaimLicense(event){
@@ -275,8 +279,10 @@ export class ClaimComponent implements OnInit {
       licenseMode: 'addDevices'
     }).then( res => {
       this.messageService.add("License Claimed");
+      this.toasterService.pop('success', 'License Claimed');
       }).catch(error => {
-        this.messageService.add("License Error: "+ error)
+        this.messageService.add("License Error: "+ error);
+        this.toasterService.pop('error', 'License Error: '+ error);
       });;
   }
 
